@@ -46,7 +46,7 @@ public class practica1 {
             System.out.print("  Enter the option: ");
             option = scanner.nextInt();
             if(option==1){
-                //customerRentMovies();
+                customerRentMovie(customersNames, customersId, customersPhone, customerRentMovies,moviesId, moviesName, movieYear, moviesCategory,movieAvailable);
 
             }else if(option==2){
                 // returnMovie();
@@ -84,7 +84,8 @@ public class practica1 {
         scanner.nextLine();
         String name = scanner.nextLine();
         System.out.print("Enter the year of the movie: ");
-        String year = scanner.nextLine();
+        int year = scanner.nextInt();
+        scanner.nextLine();
         System.out.print("Enter the category of the movie: ");
         String category = scanner.nextLine();
         for (int i = 0;i<moviesName.length;i++){
@@ -93,10 +94,12 @@ public class practica1 {
                 moviesName[i] = name;  //assign name
                 moviesId[i] = movies_Id; //assign id
                 movieAvailable[i] = true; //assign available
+                moviesCategory[i]=category;  //assign category
+                movieYear[i] = year; //assign year
                 System.out.println("Succesfull ....");
                 break;
             }
-            System.out.println(" --------- Error ----------  ");
+            //System.out.println(" --------- Error ----------  ");
 
         }System.out.println("\n");
     }
@@ -135,7 +138,7 @@ public class practica1 {
                 System.out.println("Succesfull ....");
                 break;
             }
-            System.out.println(" --------- Error ----------  ");
+            //System.out.println(" --------- Error ----------  ");
 
         }System.out.println("\n");
     }
@@ -155,7 +158,27 @@ public class practica1 {
         System.out.println("*****************************************************************************************");
     }
 
-    //
+    //method to rent a movie
+    public void customerRentMovie(String[]customersNames,int[] customersId,int[] customersPhone,boolean[] customerRentMovies,int[] moviesId, String[]moviesName, int[]movieYear, String[]moviesCategory,boolean[] movieAvailable){
+        avialableMovies(moviesId, moviesName, movieYear, moviesCategory,movieAvailable);
+    }
+    //method to print avialable movie 
+    public void avialableMovies(int[] moviesId, String[]moviesName, int[]movieYear, String[]moviesCategory,boolean[] movieAvailable){
+        System.out.println("*****************************************************************************************");
+        System.out.println("*****************************   Avialable Movies   **************************************");
+        System.out.println("*****************************************************************************************");
+        System.out.println(" Id           Name                   Year                Category              Available");
+        System.out.println("*****************************************************************************************");
+        for(int i=0;i<moviesName.length;i++){
+            if(movieAvailable[i] == true){
+                System.out.printf("%2d            %-15s       %4d                  %-10s            %-5s%n",moviesId[i],moviesName[i],movieYear[i],moviesCategory[i],movieAvailable[i]);
+            }
+            else if(moviesName[i] == null){
+                break;
+            }
+        }
+        System.out.println("*****************************************************************************************");
+    }
 
 
 
