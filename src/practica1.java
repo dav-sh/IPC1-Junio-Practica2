@@ -90,12 +90,12 @@ public class practica1 {
         String category = scanner.nextLine();
         for (int i = 0;i<moviesName.length;i++){
             if(moviesName[i] == null){
-                movies_Id++; //movie counter
                 moviesName[i] = name;  //assign name
                 moviesId[i] = movies_Id; //assign id
                 movieAvailable[i] = true; //assign available
                 moviesCategory[i]=category;  //assign category
                 movieYear[i] = year; //assign year
+                movies_Id++; //movie counter
                 System.out.println("Succesfull ....");
                 break;
             }
@@ -110,7 +110,7 @@ public class practica1 {
         System.out.println("*****************************************************************************************");
         for(int i=0;i<moviesName.length;i++){
             if(moviesName[i] != null){
-                System.out.printf("%2d            %-15s       %4d                  %-10s            %-5s%n",moviesId[i],moviesName[i],movieYear[i],moviesCategory[i],movieAvailable[i]);
+                System.out.printf("%2d            %-15s        %-4d                 %-10s            %-5s%n",moviesId[i],moviesName[i],movieYear[i],moviesCategory[i],movieAvailable[i]);
             }
             else{
                 break;
@@ -130,11 +130,11 @@ public class practica1 {
         scanner.nextLine();
         for (int i = 0;i<customersNames.length;i++){
             if(customersNames[i] == null){
-                customer_Id++; //customer counter
                 customersNames[i] = name;  //assign name
                 customersId[i] = customer_Id; //assign id
                 customerRentMovies[i] = false; //assign available
                 customersPhone[i]=phone;  //add phone number
+                customer_Id++; //customer counter
                 System.out.println("Succesfull ....");
                 break;
             }
@@ -145,11 +145,11 @@ public class practica1 {
     //method to see customers
     public void seeCustomers(String[]customersNames,int[] customersId,int[] customersPhone,boolean[] customerRentMovies){
         System.out.println("*****************************************************************************************");
-        System.out.println(" Id           Name                              Phone                Rent-Movie          ");
+        System.out.println(" Id           Name                            Phone                  Rent-Movie          ");
         System.out.println("*****************************************************************************************");
         for(int i=0;i<customersNames.length;i++){
             if(customersNames[i] != null){
-                System.out.printf("%2d            %-30s  %10d                %-5s%n",customersId[i],customersNames[i],customersPhone[i],customerRentMovies[i]);
+                System.out.printf("%2d            %-30s  %-10d                %-5s%n",customersId[i],customersNames[i],customersPhone[i],customerRentMovies[i]);
             }
             else{
                 break;
@@ -194,7 +194,7 @@ public class practica1 {
         System.out.println("*****************************************************************************************");
         for(int i=0;i<moviesName.length;i++){
             if(movieAvailable[i] == true){
-                System.out.printf("%2d            %-15s       %-4d                  %-10s            %-5s%n",moviesId[i],moviesName[i],movieYear[i],moviesCategory[i],movieAvailable[i]);
+                System.out.printf("%-2d            %-15s       %-4d                  %-10s            %-5s%n",moviesId[i],moviesName[i],movieYear[i],moviesCategory[i],movieAvailable[i]);
             }
             else if(moviesName[i] == null){
                 break;
@@ -246,7 +246,9 @@ public class practica1 {
             option = scanner.nextInt();
             if(option ==1){
 
-                rentedMovies(moviesId, moviesName, movieYear, moviesCategory,movieAvailable, customersId, customersNames, customerRentMovies);
+                rentedMovies(moviesId, moviesIdrent, moviesName, movieAvailable, customersIdrent, customersNames, customersId,customerRentMovies, daysRent);
+               // rentedMovies(moviesId, moviesName, movieYear, moviesCategory,movieAvailable, customersId, customersNames, customerRentMovies);
+
             }else if(option==2){
 
                 selectMovietoReturn(customersId, customerRentMovies, customersNames, movieAvailable,moviesIdrent,customersIdrent,daysRent);
@@ -260,15 +262,15 @@ public class practica1 {
 
     }
     //method to print not available movie 
-    public void rentedMovies(int[] moviesId, String[]moviesName, int[]movieYear, String[]moviesCategory,boolean[] movieAvailable, int[]customersId, String[]customersNames,boolean[] customerRentMovies){
+    public void rentedMovies(int[]moviesId, int[] moviesIdrent, String[]moviesName, boolean[] movieAvailable, int []customersIdrent, String[]customersNames, int[]customersId,boolean[] customerRentMovies, int[] daysRent){
         System.out.println("*****************************************************************************************");
         System.out.println("*******************************   Rented Movies   ***************************************");
         System.out.println("*****************************************************************************************");
-        System.out.println(" Id           Name                   Year                Category              Rented    "); //i need to modify this to write the name and id of customer
+        System.out.println(" Id-Movie     Name-Movie            Id-Customer       Customer            days-Rented    "); //i need to modify this to write the name and id of customer
         System.out.println("*****************************************************************************************");
         for(int i=0;i<moviesName.length;i++){
             if(movieAvailable[i] != true && moviesName[i] != null){
-                System.out.printf("%2d            %-15s       %-4d                  %-10s            %-5s%n",moviesId[i],moviesName[i],movieYear[i],moviesCategory[i],movieAvailable[i]);
+                System.out.printf("%-2d            %-15s       %-2d              %-30s            %-4d%n",moviesId[i],moviesName[i],customersId[i],customersNames[i],daysRent[i]);
             }
             else if(moviesName[i] == null){
                 break;
