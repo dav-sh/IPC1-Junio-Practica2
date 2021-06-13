@@ -46,7 +46,7 @@ public class practica1 {
             System.out.print("  Enter the option: ");
             option = scanner.nextInt();
             if(option==1){
-                customerRentMovie(customersNames, customersId, customersPhone, customerRentMovies,moviesId, moviesName, movieYear, moviesCategory,movieAvailable);
+                customerRentMovie(customersNames, customersId, customersPhone, customerRentMovies,moviesId, moviesName, movieYear, moviesCategory,movieAvailable,moviesIdrent,customersIdrent,daysRent);
 
             }else if(option==2){
                 // returnMovie();
@@ -159,8 +159,31 @@ public class practica1 {
     }
 
     //method to rent a movie
-    public void customerRentMovie(String[]customersNames,int[] customersId,int[] customersPhone,boolean[] customerRentMovies,int[] moviesId, String[]moviesName, int[]movieYear, String[]moviesCategory,boolean[] movieAvailable){
-        avialableMovies(moviesId, moviesName, movieYear, moviesCategory,movieAvailable);
+    public void customerRentMovie(String[]customersNames,int[] customersId,int[] customersPhone,boolean[] customerRentMovies,int[] moviesId, String[]moviesName, int[]movieYear, String[]moviesCategory,boolean[] movieAvailable, int[]moviesIdrent, int[]customersIdrent, int[]daysRent){
+        int option = 0;
+        do{
+            System.out.println("********************************");
+            System.out.println("1. see available movies");
+            System.out.println("2. rent a movie");
+            System.out.println("3. return");
+            System.out.println("********************************");
+            System.out.print(" Option: ");
+            option = scanner.nextInt();
+            if(option ==1){
+
+                avialableMovies(moviesId, moviesName, movieYear, moviesCategory,movieAvailable);
+            }else if(option==2){
+
+                //selectMovietoRent(customersNames, customersId, customersPhone, customerRentMovies,moviesId, moviesName, movieYear, moviesCategory,movieAvailable,moviesIdrent,customersIdrent,daysRent);
+                selectMovietoRent(customersId, customerRentMovies, customersNames, movieAvailable);
+            }else if(option==3){
+                System.out.println("Returning ...");
+            }else{
+                System.out.println("Wrong option");
+            }
+
+        }while(option!=3);
+
     }
     //method to print avialable movie 
     public void avialableMovies(int[] moviesId, String[]moviesName, int[]movieYear, String[]moviesCategory,boolean[] movieAvailable){
@@ -178,6 +201,30 @@ public class practica1 {
             }
         }
         System.out.println("*****************************************************************************************");
+    }
+
+    //method to select a movie for rent
+    public void selectMovietoRent(int[] customersId, boolean[] customerRentMovies, String[]customersNames,boolean[]movieAvailable ){
+        System.out.println("Enter the movie id: ");
+        int idMovie = scanner.nextInt();
+        System.out.println("Enter the customer id: ");
+        int idCustomer = scanner.nextInt();
+        scanner.nextLine();
+        if((movieAvailable[idMovie] ==true) && (customerRentMovies[idCustomer]==false)){
+            System.out.println("Are you sure to rent this movie? (Y/N ) ");
+            String option = scanner.nextLine();
+            if(option.equalsIgnoreCase("y")){
+                movieAvailable[idMovie] = false;
+                customerRentMovies[idCustomer]=true;
+                System.out.println("Succesfull...");
+            }
+        }
+
+    }
+
+    //method rented movies
+    public void rentedMovies(int[] customersId, int[] moviesId, int[] daysRent){
+
     }
 
 
