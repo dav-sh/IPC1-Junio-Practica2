@@ -275,7 +275,7 @@ public class practica1 {
 
             }else if(option==2){
 
-                selectMovietoReturn(customersId, customerRentMovies, customersNames, movieAvailable,moviesIdrent,customersIdrent,daysRent);
+                selectMovietoReturn(customersId, customerRentMovies, customersNames, movieAvailable,moviesIdrent,customersIdrent,daysRent,moviesName);
             }else if(option==3){
                 System.out.println("Returning ...");
             }else{
@@ -293,8 +293,8 @@ public class practica1 {
         System.out.println(" Id-Movie     Name-Movie            Id-Customer       Customer            days-Rented    "); //i need to modify this to write the name and id of customer
         System.out.println("*****************************************************************************************");
         for(int i=0;i<moviesName.length;i++){
-            if(movieAvailable[i] != true && moviesName[i] != null){
-                System.out.printf("%-2d            %-15s       %-2d              %-30s            %-4d%n",moviesId[i],moviesName[i],customersId[i],customersNames[i],daysRent[i]);
+            if(movieAvailable[i] != true && moviesName[i] != null && customersNames[i]!=null){
+                System.out.printf(" %-2d           %-15s       %-2d                 %-30s %-4d%n",moviesId[i],moviesName[i],customersId[i],customersNames[i],daysRent[i]);
             }
             else if(moviesName[i] == null){
                 break;
@@ -304,13 +304,13 @@ public class practica1 {
     }
 
     //method to select a movie for return
-    public void selectMovietoReturn(int[] customersId, boolean[] customerRentMovies, String[]customersNames,boolean[]movieAvailable,int[] moviesIdrent, int[] customersIdrent,int[] daysRent ){
+    public void selectMovietoReturn(int[] customersId, boolean[] customerRentMovies, String[]customersNames,boolean[]movieAvailable,int[] moviesIdrent, int[] customersIdrent,int[] daysRent, String[]moviesName  ){
         System.out.println("Enter the movie id: ");
         int idMovie = scanner.nextInt();
         System.out.println("Enter the customer id: ");
         int idCustomer = scanner.nextInt();
         scanner.nextLine();
-        if((movieAvailable[idMovie] !=true) && (customerRentMovies[idCustomer]!=false)){
+        if((movieAvailable[idMovie] !=true) && (customerRentMovies[idCustomer]!=false)&& moviesName[idMovie] != null && customersNames[idCustomer]!=null){
             System.out.println("Are you sure to return this movie? (Y/N ) ");
             String option = scanner.nextLine();
             if(option.equalsIgnoreCase("y")){
@@ -331,7 +331,7 @@ public class practica1 {
         do{
             System.out.println("********************************");
             System.out.println("1. see movies by category");
-            System.out.println("2. search category");
+            System.out.println("2. search by category");
             System.out.println("3. Report movies");
             System.out.println("4. most rented movie ");
             System.out.println("5. least rented movie ");
@@ -341,11 +341,11 @@ public class practica1 {
             System.out.print(" Option: ");
             option = scanner.nextInt();
             if(option ==1){
-                categoryMovies(moviesId, moviesIdrent, moviesName, movieAvailable, customersIdrent, customersNames, customersId,customerRentMovies, daysRent);
+                categoryMovies(moviesId, moviesIdrent, moviesName, movieAvailable, customersIdrent, customersNames, customersId,customerRentMovies, daysRent,moviesCategory);
 
             }else if(option==2){
 
-                //searchCategory(customersId, customerRentMovies, customersNames, movieAvailable,moviesIdrent,customersIdrent,daysRent);
+                searchCategory(moviesId, moviesIdrent, moviesName, movieAvailable, customersIdrent, customersNames, customersId,customerRentMovies, daysRent,moviesCategory);
             }else if(option==3){
                 //reportMovies();
             }
@@ -367,10 +367,61 @@ public class practica1 {
 
 
     }
-    public void categoryMovies(int[]moviesId,int[] moviesIdrent, String[]moviesName, boolean[]movieAvailable, int[]customersIdrent, String[]customersNames, int[]customersId,boolean[]customerRentMovies, int[]daysRent){
-
+    public void categoryMovies(int[]moviesId,int[] moviesIdrent, String[]moviesName, boolean[]movieAvailable, int[]customersIdrent, String[]customersNames, int[]customersId,boolean[]customerRentMovies, int[]daysRent,String[] moviesCategory){
+        System.out.println("*****************************************************************************************");
+        System.out.println("*******************************   Category Movies   *************************************");
+        System.out.println("*****************************************************************************************");
+        System.out.println(" Action           Comedy              Family          Romance              Mystery       "); //i need to modify this to write the name and id of customer
+        System.out.println("*****************************************************************************************\n");
+        int action =0;
+        int comedy =0;
+        int family=0;
+        int romance=0;
+        int mystery=0;
+        for(int i=0;i<moviesName.length;i++){
+            if(moviesName[i]!=null){
+                        //Action
+                if(moviesCategory[i].equals("Action")){
+                    action++;
+                }else if(moviesCategory[i].equals("Comedy")){
+                    comedy++;
+                }else if(moviesCategory[i].equals("Family")){
+                    family++;
+                }else if(moviesCategory[i].equals("Romance")){
+                    romance++;
+                }else if(moviesCategory[i].equals("Mystery")){
+                    mystery++;
+                    
+                }
+            }
+                // System.out.println("*****************************************************************************************");
+            else if(moviesName[i] == null){
+                break;
+            }
+        } 
+        System.out.printf("   %-2d           %-2d                 %-2d              %-2d                 %-2d%n%n",action,comedy,family,romance,mystery);
+        System.out.println("*****************************************************************************************");
     }
-                
+
+
+    public void searchCategory(int[]moviesId,int[] moviesIdrent, String[]moviesName, boolean[]movieAvailable, int[]customersIdrent, String[]customersNames, int[]customersId,boolean[]customerRentMovies, int[]daysRent,String[] moviesCategory){
+        for(int i=0;i<moviesName.length;i++){
+            if(moviesName[i] != null){
+                    //Action
+                    if(moviesCategory[i].equals("Action")){
+                        System.out.println("********************************  Action  ***********************************************");
+                        System.out.println("  Id             Name-Movie");
+                        // System.out.printf("%-2d            %-15s       %-2d              %-30s            %-4d%n",moviesId[i],moviesName[i],customersId[i],customersNames[i],daysRent[i]);
+                        System.out.printf("  %-2d             %-15s       %n",moviesId[i],moviesName[i]);
+                    }
+                // System.out.println("*****************************************************************************************");
+            }
+            else if(moviesName[i] == null){
+                break;
+            }
+        }
+        System.out.println("*****************************************************************************************");
+    }  
 
 
     
