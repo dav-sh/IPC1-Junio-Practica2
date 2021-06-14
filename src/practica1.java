@@ -6,6 +6,7 @@ public class practica1 {
     Scanner scanner = new Scanner(System.in);
     int customer_Id =0;
     int movies_Id =0;
+    String[]category = {"Action","Comedy","Family","Romance"};
     //Contructor
     public practica1() {
         // customers
@@ -68,7 +69,7 @@ public class practica1 {
                 seeCustomers(customersNames, customersId, customersPhone, customerRentMovies);
             }else if(option==8){
 
-                // report();
+                report(customersNames, customersId, customersPhone, customerRentMovies,moviesId, moviesName, movieYear, moviesCategory,movieAvailable,moviesIdrent,customersIdrent,daysRent);
             }else if(option==9){
                 System.out.println(" Exiting ...");
             }else{
@@ -87,6 +88,7 @@ public class practica1 {
         int year = scanner.nextInt();
         scanner.nextLine();
         System.out.print("Enter the category of the movie: ");
+        //here add changes
         String category = scanner.nextLine();
         for (int i = 0;i<moviesName.length;i++){
             if(moviesName[i] == null){
@@ -297,6 +299,58 @@ public class practica1 {
         }
 
     }
+    //method to sort the lists
+
+
+
+    //method to generate reports
+    public void report(String[]customersNames,int[] customersId,int[] customersPhone,boolean[] customerRentMovies,int[] moviesId, String[]moviesName, int[]movieYear, String[]moviesCategory,boolean[] movieAvailable, int[]moviesIdrent, int[]customersIdrent, int[]daysRent){
+        int option = 0;
+        do{
+            System.out.println("********************************");
+            System.out.println("1. see movies by category");
+            System.out.println("2. search category");
+            System.out.println("3. Report movies");
+            System.out.println("4. most rented movie ");
+            System.out.println("5. least rented movie ");
+            System.out.println("6. return");
+
+            System.out.println("********************************");
+            System.out.print(" Option: ");
+            option = scanner.nextInt();
+            if(option ==1){
+                categoryMovies(moviesId, moviesIdrent, moviesName, movieAvailable, customersIdrent, customersNames, customersId,customerRentMovies, daysRent);
+
+            }else if(option==2){
+
+                //searchCategory(customersId, customerRentMovies, customersNames, movieAvailable,moviesIdrent,customersIdrent,daysRent);
+            }else if(option==3){
+                //reportMovies();
+            }
+            else if(option==4){
+                //mostRented();
+            }
+            else if(option==5){
+                //leastRented();
+            }
+            else if(option==6){
+                System.out.println("Returning ...");
+            }
+            else{
+                System.out.println("Wrong option");
+            }
+
+        }while(option!=6);
+
+
+
+    }
+    public void categoryMovies(int[]moviesId,int[] moviesIdrent, String[]moviesName, boolean[]movieAvailable, int[]customersIdrent, String[]customersNames, int[]customersId,boolean[]customerRentMovies, int[]daysRent){
+
+    }
+                
+
+
     
 
 
