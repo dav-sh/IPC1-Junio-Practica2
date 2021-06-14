@@ -98,6 +98,7 @@ public class practica1 {
         int opCategory = scanner.nextInt();
         for (int i = 0;i<moviesName.length;i++){
             if(moviesName[i] == null){
+                movies_Id++; //movie counter
                 moviesName[i] = name;  //assign name
                 moviesId[i] = movies_Id; //assign id
                 movieAvailable[i] = true; //assign available
@@ -119,7 +120,6 @@ public class practica1 {
                     moviesCategory[i]=category[opCategory-1];  //Mystery
                     
                 }
-                movies_Id++; //movie counter
                 System.out.println("Succesfull ....");
                 break;
             }
@@ -154,11 +154,11 @@ public class practica1 {
         scanner.nextLine();
         for (int i = 0;i<customersNames.length;i++){
             if(customersNames[i] == null){
+                customer_Id++; //customer counter
                 customersNames[i] = name;  //assign name
                 customersId[i] = customer_Id; //assign id
                 customerRentMovies[i] = false; //assign available
                 customersPhone[i]=phone;  //add phone number
-                customer_Id++; //customer counter
                 System.out.println("Succesfull ....");
                 break;
             }
@@ -236,12 +236,12 @@ public class practica1 {
         System.out.print("Enter the numbers of days: ");
         int days = scanner.nextInt();
         scanner.nextLine();
-        if((movieAvailable[idMovie] ==true) && (customerRentMovies[idCustomer]==false)){
+        if(((movieAvailable[idMovie-1] ==true) && (customerRentMovies[idCustomer-1]==false)) && (idMovie>0 && idCustomer>0)){
             System.out.println("Are you sure to rent this movie? (Y/N ) ");
             String option = scanner.nextLine();
             if(option.equalsIgnoreCase("y")){
-                movieAvailable[idMovie] = false; //change available movie to false    
-                customerRentMovies[idCustomer]=true; //change available customer rent to true
+                movieAvailable[idMovie-1] = false; //change available movie to false    
+                customerRentMovies[idCustomer-1]=true; //change available customer rent to true
                 for(int i=0;i<customersIdrent.length;i++){
                     if(customersIdrent[i]==0){
                         moviesIdrent[i] = idMovie;
@@ -310,12 +310,12 @@ public class practica1 {
         System.out.println("Enter the customer id: ");
         int idCustomer = scanner.nextInt();
         scanner.nextLine();
-        if((movieAvailable[idMovie] !=true) && (customerRentMovies[idCustomer]!=false)&& moviesName[idMovie] != null && customersNames[idCustomer]!=null){
+        if((movieAvailable[idMovie-1] !=true) && (customerRentMovies[idCustomer-1]!=false)&& moviesName[idMovie-1] != null && customersNames[idCustomer-1]!=null){
             System.out.println("Are you sure to return this movie? (Y/N ) ");
             String option = scanner.nextLine();
             if(option.equalsIgnoreCase("y")){
-                movieAvailable[idMovie] = true; //change available movie to true    
-                customerRentMovies[idCustomer]=false; //change available customer rent to false
+                movieAvailable[idMovie-1] = true; //change available movie to true    
+                customerRentMovies[idCustomer-1]=false; //change available customer rent to false
                 System.out.println("Succesfull...");
             }
         }
@@ -330,7 +330,7 @@ public class practica1 {
         int option = 0;
         do{
             System.out.println("********************************");
-            System.out.println("1. see movies by category");
+            System.out.println("1. see movie numbers by category");
             System.out.println("2. search by category");
             System.out.println("3. Report movies");
             System.out.println("4. most rented movie ");
@@ -347,7 +347,7 @@ public class practica1 {
 
                 searchCategory(moviesId, moviesIdrent, moviesName, movieAvailable, customersIdrent, customersNames, customersId,customerRentMovies, daysRent,moviesCategory);
             }else if(option==3){
-                //reportMovies();
+                reportMovies(moviesIdrent,moviesName,movieAvailable,moviesId);
             }
             else if(option==4){
                 //mostRented();
@@ -422,9 +422,10 @@ public class practica1 {
         String[]movies=movies(opCategory,moviesName,moviesCategory);
         int[]idmovies=idmovies(opCategory,moviesName,moviesCategory,moviesId);
         System.out.println("  Id-Movie              Name-Movie");
+        System.out.println("*****************************************************************************************");
         for(int i=0;i<movies.length;i++){
             if(movies[i]!=null){
-                System.out.printf(" %-2d            %-15s%n ",idmovies[i],movies[i]);
+                System.out.printf(" %-2d                    %-15s%n",idmovies[i],movies[i]);
             }
         }
         System.out.println("*****************************************************************************************");
@@ -465,6 +466,21 @@ public class practica1 {
             }
         return id;
     }
+
+    public void reportMovies(int[] moviesIdrent,String[]moviesName,boolean[]movieAvailable,int[]moviesId){
+        int counter = 0;
+        for(int i=0;i<moviesIdrent.length;i++){
+            if(moviesIdrent[i]!=0){
+
+                System.out.println(" id: "+moviesIdrent[i]);
+            }
+            else if(moviesIdrent[i]==0){
+                break;
+            }
+        }
+
+    }
+
 
 
     
