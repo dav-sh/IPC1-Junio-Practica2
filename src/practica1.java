@@ -247,6 +247,7 @@ public class practica1 {
                         moviesIdrent[i] = idMovie;
                         customersIdrent[i]= idCustomer;
                         daysRent[i]=days;
+                        break;
                     }
                 }
                 
@@ -350,10 +351,10 @@ public class practica1 {
                 reportMovies(moviesIdrent,moviesName,movieAvailable,moviesId);
             }
             else if(option==4){
-                //mostRented();
+                mostRented(moviesIdrent,moviesName,movieAvailable,moviesId);
             }
             else if(option==5){
-                //leastRented();
+                leastRented(moviesIdrent,moviesName,movieAvailable,moviesId);
             }
             else if(option==6){
                 System.out.println("Returning ...");
@@ -468,17 +469,112 @@ public class practica1 {
     }
 
     public void reportMovies(int[] moviesIdrent,String[]moviesName,boolean[]movieAvailable,int[]moviesId){
-        int counter = 0;
-        for(int i=0;i<moviesIdrent.length;i++){
-            if(moviesIdrent[i]!=0){
+        //int counter = 0;
+        System.out.println("*****************************************************************************************");
+        System.out.println("                                      Reports                                            ");
+        System.out.println("*****************************************************************************************");
+        for(int i=0;i<moviesName.length;i++){
+            if(moviesName[i]!=null){
+                String aux = moviesName[i];
+                int aux2 = moviesId[i];
+                int countAux=0;
+                for(int j=0;j<moviesIdrent.length;j++){
+                    if(moviesIdrent[j]!=0 && moviesIdrent[j]==aux2){
+                        countAux++;
+                        //System.out.println(" #: "+countAux);
+                    }
+                
+                }
+                System.out.printf(" %-15s           #Rented: %-2d%n",aux,countAux);
 
-                System.out.println(" id: "+moviesIdrent[i]);
+                
             }
-            else if(moviesIdrent[i]==0){
+        }
+        System.out.println("*****************************************************************************************");
+    }
+    public void mostRented(int[] moviesIdrent,String[]moviesName,boolean[]movieAvailable,int[]moviesId){
+         int[] counter=new int[30];
+        String[]name=new String[30];
+        System.out.println("*****************************************************************************************");
+        System.out.println("                                Most Movie Rented                                        ");
+        System.out.println("*****************************************************************************************");
+        for(int i=0;i<moviesName.length;i++){
+            if(moviesName[i]!=null){
+                String aux = moviesName[i];
+                int aux2 = moviesId[i];
+                int countAux=0;
+                for(int j=0;j<moviesIdrent.length;j++){
+                    if(moviesIdrent[j]!=0 && moviesIdrent[j]==aux2){
+                        countAux++;
+                        //System.out.println(" #: "+countAux);
+                    }
+                }
+                counter[i]=countAux;
+                name[i]=aux;
+            }
+        }
+        int less=counter[0];
+        String movie=name[0];
+        for(int i=0;i<counter.length;i++){
+            if(name[i]!=null){
+                if(less<=counter[i]){
+                    less = counter[i];
+                    movie = name[i];
+                }
+            
+            }else{
                 break;
             }
         }
+        if(movie!=null){
+            System.out.printf(" %-15s                          #Rented: %-2d%n",movie,less);
+        }
+        System.out.println("*****************************************************************************************");
+    }
 
+
+
+
+
+
+    public void leastRented(int[] moviesIdrent,String[]moviesName,boolean[]movieAvailable,int[]moviesId){
+        int[] counter=new int[30];
+        String[]name=new String[30];
+        System.out.println("*****************************************************************************************");
+        System.out.println("                                Least Movie Rented                                       ");
+        System.out.println("*****************************************************************************************");
+        for(int i=0;i<moviesName.length;i++){
+            if(moviesName[i]!=null){
+                String aux = moviesName[i];
+                int aux2 = moviesId[i];
+                int countAux=0;
+                for(int j=0;j<moviesIdrent.length;j++){
+                    if(moviesIdrent[j]!=0 && moviesIdrent[j]==aux2){
+                        countAux++;
+                        //System.out.println(" #: "+countAux);
+                    }
+                }
+                counter[i]=countAux;
+                name[i]=aux;
+            }
+        }
+        int less=counter[0];
+        String movie=name[0];
+        for(int i=0;i<counter.length;i++){
+            if(name[i]!=null){
+                if(less>=counter[i]){
+                    less = counter[i];
+                    movie = name[i];
+                }
+            
+            }else{
+                break;
+            }
+        }
+        if(movie!=null){
+            System.out.printf(" %-15s                          #Rented: %-2d%n",movie,less);
+        }
+        System.out.println("*****************************************************************************************");
     }
 
 
