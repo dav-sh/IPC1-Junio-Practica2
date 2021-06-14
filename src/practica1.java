@@ -6,7 +6,7 @@ public class practica1 {
     Scanner scanner = new Scanner(System.in);
     int customer_Id =0;
     int movies_Id =0;
-    String[]category = {"Action","Comedy","Family","Romance"};
+    String[]category = {"Action","Comedy","Family","Romance","Mystery"};
     //Contructor
     public practica1() {
         // customers
@@ -87,16 +87,38 @@ public class practica1 {
         System.out.print("Enter the year of the movie: ");
         int year = scanner.nextInt();
         scanner.nextLine();
-        System.out.print("Enter the category of the movie: ");
+        System.out.println("Enter the category of the movie ");
+        System.out.println(" 1. Action");
+        System.out.println(" 2. Comedy");
+        System.out.println(" 3. Family");
+        System.out.println(" 4. Romance ");
+        System.out.println(" 5. Mystery ");
+        System.out.print(" Enter the option: ");
         //here add changes
-        String category = scanner.nextLine();
+        int opCategory = scanner.nextInt();
         for (int i = 0;i<moviesName.length;i++){
             if(moviesName[i] == null){
                 moviesName[i] = name;  //assign name
                 moviesId[i] = movies_Id; //assign id
                 movieAvailable[i] = true; //assign available
-                moviesCategory[i]=category;  //assign category
                 movieYear[i] = year; //assign year
+                //assign category
+                if(opCategory==1){
+                    moviesCategory[i]=category[opCategory-1];  //Action
+
+                }else if(opCategory==2){
+                    moviesCategory[i]=category[opCategory-1];  //Comedy
+                    
+                }else if(opCategory==3){
+                    moviesCategory[i]=category[opCategory-1];  //Family
+                    
+                }else if(opCategory==4){
+                    moviesCategory[i]=category[opCategory-1];  //Romance
+                    
+                }else if(opCategory==5){
+                    moviesCategory[i]=category[opCategory-1];  //Mystery
+                    
+                }
                 movies_Id++; //movie counter
                 System.out.println("Succesfull ....");
                 break;
