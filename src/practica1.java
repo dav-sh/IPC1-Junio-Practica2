@@ -369,7 +369,7 @@ public class practica1 {
     }
     public void categoryMovies(int[]moviesId,int[] moviesIdrent, String[]moviesName, boolean[]movieAvailable, int[]customersIdrent, String[]customersNames, int[]customersId,boolean[]customerRentMovies, int[]daysRent,String[] moviesCategory){
         System.out.println("*****************************************************************************************");
-        System.out.println("*******************************   Category Movies   *************************************");
+        System.out.println("*******************************  Number of Movies  **************************************");
         System.out.println("*****************************************************************************************");
         System.out.println(" Action           Comedy              Family          Romance              Mystery       "); //i need to modify this to write the name and id of customer
         System.out.println("*****************************************************************************************\n");
@@ -399,29 +399,72 @@ public class practica1 {
                 break;
             }
         } 
-        System.out.printf("   %-2d           %-2d                 %-2d              %-2d                 %-2d%n%n",action,comedy,family,romance,mystery);
+        System.out.printf("   %-2d              %-2d                    %-2d             %-2d                  %-2d%n%n",action,comedy,family,romance,mystery);
         System.out.println("*****************************************************************************************");
     }
 
 
     public void searchCategory(int[]moviesId,int[] moviesIdrent, String[]moviesName, boolean[]movieAvailable, int[]customersIdrent, String[]customersNames, int[]customersId,boolean[]customerRentMovies, int[]daysRent,String[] moviesCategory){
-        for(int i=0;i<moviesName.length;i++){
-            if(moviesName[i] != null){
-                    //Action
-                    if(moviesCategory[i].equals("Action")){
-                        System.out.println("********************************  Action  ***********************************************");
-                        System.out.println("  Id             Name-Movie");
-                        // System.out.printf("%-2d            %-15s       %-2d              %-30s            %-4d%n",moviesId[i],moviesName[i],customersId[i],customersNames[i],daysRent[i]);
-                        System.out.printf("  %-2d             %-15s       %n",moviesId[i],moviesName[i]);
-                    }
-                // System.out.println("*****************************************************************************************");
-            }
-            else if(moviesName[i] == null){
-                break;
+        //String[]movies = new String[30];
+        int[]id=new int[30];
+        System.out.println("*****************************************************************************************");
+        System.out.println("************************************  Movies  *******************************************");
+        System.out.println("*****************************************************************************************");
+        System.out.println(" Categories ");
+        System.out.println(" 1. Action");
+        System.out.println(" 2. Comedy");
+        System.out.println(" 3. Family");
+        System.out.println(" 4. Romance ");
+        System.out.println(" 5. Mystery ");
+        System.out.print(" Enter the option: ");
+        int opCategory = scanner.nextInt();
+        System.out.println("*****************************************************************************************");
+        String[]movies=movies(opCategory,moviesName,moviesCategory);
+        int[]idmovies=idmovies(opCategory,moviesName,moviesCategory,moviesId);
+        System.out.println("  Id-Movie              Name-Movie");
+        for(int i=0;i<movies.length;i++){
+            if(movies[i]!=null){
+                System.out.printf(" %-2d            %-15s%n ",idmovies[i],movies[i]);
             }
         }
         System.out.println("*****************************************************************************************");
-    }  
+    }
+
+    public String[] movies(int opCategory, String[]moviesName,String[]moviesCategory){
+        String[]options={"Action","Comedy","Family","Romance","Mystery"};
+        String[]movies=new String[30];
+        String option=options[opCategory-1];
+        for(int i=0;i<moviesName.length;i++){
+                if(moviesName[i] != null){
+                        if(moviesCategory[i].equals(option)){
+                            movies[i]=moviesName[i];
+                            //id[i]=moviesId[i];
+                        }
+                }
+                else if(moviesName[i] == null){
+                    break;
+                }
+            }
+        return movies;
+    }
+
+    public int[] idmovies(int opCategory, String[]moviesName,String[]moviesCategory,int[]moviesId){
+        String[]options={"Action","Comedy","Family","Romance","Mystery"};
+        int[]id=new int[30];
+        String option=options[opCategory-1];
+        for(int i=0;i<moviesName.length;i++){
+                if(moviesName[i] != null){
+                        if(moviesCategory[i].equals(option)){
+                            //movies[i]=moviesName[i];
+                            id[i]=moviesId[i];
+                        }
+                }
+                else if(moviesName[i] == null){
+                    break;
+                }
+            }
+        return id;
+    }
 
 
     
