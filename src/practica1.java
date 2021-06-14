@@ -59,7 +59,7 @@ public class practica1 {
                 enterMovie(moviesId, moviesName, movieYear, moviesCategory,movieAvailable);
                 
             }else if(option==5){
-                // orderMovies();
+                sortMovies(moviesName, moviesId,  movieYear,  moviesCategory,  movieAvailable );
 
             }else if(option==6){
 
@@ -236,7 +236,7 @@ public class practica1 {
         System.out.print("Enter the numbers of days: ");
         int days = scanner.nextInt();
         scanner.nextLine();
-        if(((movieAvailable[idMovie-1] ==true) && (customerRentMovies[idCustomer-1]==false)) && (idMovie>0 && idCustomer>0)){
+        if(((movieAvailable[idMovie-1] ==true) && (customerRentMovies[idCustomer-1]==false)) && customersId[idCustomer-1]!=0){
             System.out.println("Are you sure to rent this movie? (Y/N ) ");
             String option = scanner.nextLine();
             if(option.equalsIgnoreCase("y")){
@@ -337,7 +337,6 @@ public class practica1 {
             System.out.println("4. most rented movie ");
             System.out.println("5. least rented movie ");
             System.out.println("6. return");
-
             System.out.println("********************************");
             System.out.print(" Option: ");
             option = scanner.nextInt();
@@ -517,7 +516,7 @@ public class practica1 {
         String movie=name[0];
         for(int i=0;i<counter.length;i++){
             if(name[i]!=null){
-                if(less<=counter[i]){
+                if(less<=counter[i]){  //critical 
                     less = counter[i];
                     movie = name[i];
                 }
@@ -562,7 +561,7 @@ public class practica1 {
         String movie=name[0];
         for(int i=0;i<counter.length;i++){
             if(name[i]!=null){
-                if(less>=counter[i]){
+                if(less>=counter[i]){  //critical
                     less = counter[i];
                     movie = name[i];
                 }
@@ -577,8 +576,88 @@ public class practica1 {
         System.out.println("*****************************************************************************************");
     }
 
+    //sort the list of movies
+    public void sortMovies(String[]moviesName, int[] moviesId, int[] movieYear, String[] moviesCategory, boolean[] movieAvailable ){
+        System.out.println("*****************************************************************************************");
+        System.out.println("Procesing ...");
+        // System.out.println("Posición " + 0 + ": " + moviesName[0]);
+        // System.out.println("Posición " + 1 + ": " + moviesName[1]);
+
+        String selec = moviesName[0];
+        int pos = 0;
+
+        //modify
+        int id = moviesId[0];
+        int year = movieYear[0];
+        String category = moviesCategory[0];
+        boolean available = movieAvailable[0];
+
+        // int operaciones = 0;
+        // int intercambio = 0;
+
+        for (int i = 0; i < moviesName.length; i++) {
+            selec = moviesName[i];
+            pos = i;
+            id = i;
+
+            //modify
+            id = moviesId[i];
+            year = movieYear[i];
+            category = moviesCategory[i];
+            available = movieAvailable[i];
+
+            for (int j = i+1; j < moviesName.length; j++) {
+                if(moviesName[j]!=null && selec !=null){
+                    if (selec.compareTo(moviesName[j])>0){
+                        selec = moviesName[j];
+                        pos = j;
+                        //modify
+                        id = moviesId[j];
+                        year = movieYear[j];
+                        category = moviesCategory[j];
+                        available = movieAvailable[j];
+                    }
+
+                }
+                // operaciones++;
+            }
 
 
+            moviesName[pos] = moviesName[i];
+            moviesName[i] = selec;
+            // intercambio++;
+
+            //modify
+            moviesId[pos]=moviesId[i];
+            moviesId[i]=id;
+
+            movieYear[pos]=movieYear[i];
+            movieYear[i]=year;
+
+            moviesCategory[pos]=moviesCategory[i];
+            moviesCategory[i]=category;
+
+            movieAvailable[pos]=movieAvailable[i];
+            movieAvailable[i]=available;
+
+
+
+            
+        }
+        // System.out.println("Operaciones: "+operaciones + " Intercambios "+intercambio);
+        // for (int i = 0; i < moviesName.length; i++) {
+        //     System.out.println("Posición " + i + ": " + moviesName[i]);
+        // }
+    
+        System.out.println("Succesfull ...");
+
+    
+    }
+
+    
+    public void imprimirMatriz(int[] array) {
+        
+    }
     
 
 
