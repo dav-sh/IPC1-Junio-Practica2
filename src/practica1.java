@@ -592,8 +592,6 @@ public class practica1 {
         String category = moviesCategory[0];
         boolean available = movieAvailable[0];
 
-        // int operaciones = 0;
-        // int intercambio = 0;
 
         for (int i = 0; i < moviesName.length; i++) {
             selec = moviesName[i];
@@ -619,13 +617,12 @@ public class practica1 {
                     }
 
                 }
-                // operaciones++;
             }
 
 
             moviesName[pos] = moviesName[i];
             moviesName[i] = selec;
-            // intercambio++;
+
 
             //modify
             moviesId[pos]=moviesId[i];
@@ -655,15 +652,6 @@ public class practica1 {
     }
 
     
-    public void imprimirMatriz(int[] array) {
-        
-    }
-    
-
-
-
-
-
 
 
 
